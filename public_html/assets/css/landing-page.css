@@ -1,0 +1,38 @@
+#beranda{
+    padding-top: 100px;
+    min-height: calc(100vh + 80px);
+    padding-bottom: 148px;
+    position: relative;
+}
+#beranda .rounded-bottom{
+    position: absolute;
+    bottom: 0;
+    width: 100%;
+    height: 80px;
+    overflow: hidden;
+}
+#beranda .rounded-bottom svg{
+    position: relative;
+    width: 100%;
+    height: 100%;
+}
+
+@media (max-width: 767px) {
+    #beranda{
+        padding-bottom: 50px !important;
+        min-height: calc(100vh);
+    }
+}
+/* #beranda .img-ketua{
+    background-image: url('../img/ketua.png');
+    background-position: center;
+    background-repeat: no-repeat;
+    background-size: contain;
+    position: relative;
+}
+#beranda .img-ketua > span{
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+} */
