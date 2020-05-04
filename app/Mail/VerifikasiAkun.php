@@ -34,7 +34,7 @@ class VerifikasiAkun extends Mailable
 
          $link = route('signup.verify', ['token' => $encryptedEmail]);
  
-         return $this->subject('Verify Your Email Address')
+         return $this->subject('Verifikasi Akun Anda')
              ->with('link', $link)
              ->view('email.verifikasi');
 
