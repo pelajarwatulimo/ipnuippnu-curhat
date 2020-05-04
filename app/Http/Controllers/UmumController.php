@@ -73,10 +73,10 @@ class UmumController extends Controller
         if( $file = $request->file('sign-foto') )
         {
             $filename = Str::random(20) .'_'. time() .'.'. $file->getClientOriginalExtension();
-            $file->move(base_path() . '/../data/users_img/' , $filename);
-            $img = \Image::make(base_path() . '/../data/users_img/' . $filename);
+            $file->move(public_path() . '/data/users_img/' , $filename);
+            $img = \Image::make(public_path() . '/data/users_img/' . $filename);
             $img->fit(500);
-            $img->save(base_path() . '/../data/users_img/' . $filename);
+            $img->save(public_path() . '/data/users_img/' . $filename);
         }
         
 
