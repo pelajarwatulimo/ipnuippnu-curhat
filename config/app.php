@@ -16,7 +16,7 @@ return [
     'name' => 'Curhat Rekan & Rekanita',
     'author' => 'PAC IPNU & IPPNU Watulimo',
     'license' => 'Lisensi Terbuka oleh PAC IPNU & IPPNU Watulimo',
-    'version' => '0.9.3-beta',
+    'version' => '0.9.4-beta',
     'akhiran_enkripsi' => 'lalisandine',
     'onesignal_appID' => env('ONESIGNAL_APPID', null),
     'onesignal_keyAPI' => env('ONESIGNAL_KEYAPI', null),

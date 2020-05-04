@@ -17,15 +17,23 @@ class ApiController extends Controller
     {
         if( auth()->once($request->only(['email', 'password'])) )
         {
+            $data = \App\User::whereEmail($request->email)->get()->first();
             return response()->json([
                 'status' => 'success',
-                'token' => \App\User::whereEmail($request->email)->get()->first()->remember_token
+                'data' => [
+                    'token' => $data->remember_token,
+                    'is_admin' => (bool)$data->is_admin
+                ]
             ], 200);
         }
 
         return response()->json([
             'status' => 'error',
-            'message' => 'Email / kata sandi salah'
+            'message' => 'Email atau kata sandi salah',
+            'request' => [
+                'email' => $request->email,
+                'password' => $request->password
+            ]
         ], 200);
     }
 
@@ -116,6 +124,9 @@ class ApiController extends Controller
 
     public function get_pesan(Request $request)
     {
-        return \App\Message::where(['user_id' => $request->account->id])->with('message_answer.user')->get();
+        return response()->json([
+            'status' => 'success',
+            'data' => \App\Message::where(['user_id' => $request->account->id])->with('message_answer.user')->get()
+        ], 200, $headers);
     }
 }
