@@ -35,7 +35,7 @@ class UserController extends Controller
         ]);
 
         $buat = new \App\Message;
-        $buat->title = ucwords(strip_tags($request->title));
+        $buat->title = ucwords(strtolower(strip_tags($request->title)));
         $buat->message = $request->message;
         $buat->user_id = \Auth::user()->id;
         

@@ -81,7 +81,7 @@ class UmumController extends Controller
         
 
         $account = new \App\User;
-        $account->name = ucwords($request->{'sign-nama'});
+        $account->name = ucwords(strtolower($request->{'sign-nama'}));
         $account->email = $request->{'sign-email'};
         $account->ranting = \App\Ranting::find($request->{'sign-ranting'})->name;
         $account->password = bcrypt($request->{'sign-pass'});

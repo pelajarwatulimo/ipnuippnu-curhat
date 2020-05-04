@@ -82,7 +82,7 @@ class AdminController extends Controller
         ]);
 
         $data = new \App\Ranting;
-        $data->name = ucwords($request->ranting);
+        $data->name = ucwords(strtolower($request->ranting));
         $data->save();
 
         return redirect()->back()->with('informasi', [
@@ -164,7 +164,7 @@ class AdminController extends Controller
         }
 
         $app = \App\User::find(auth()->user()->id);
-        $app->jabatan = $jabatan . ucwords($request->nama);
+        $app->jabatan = $jabatan . ucwords(strtolower($request->nama));
         $app->save();
 
         return response()->json(['status' => 'sukses'], 200);
@@ -195,7 +195,7 @@ class AdminController extends Controller
             'message' => 'required'
         ]);
 
-        $isi = ucwords($request->title);
+        $isi = ucwords(strtolower($request->title));
 
         $pesan = new \App\Broadcast;
         $pesan->user_id = \Auth::user()->id;

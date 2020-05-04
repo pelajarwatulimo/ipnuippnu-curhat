@@ -50,7 +50,7 @@ class ApiController extends Controller
             ], 200);
 
         $buat = new \App\Message;
-        $buat->title = ucwords(strip_tags($request->title));
+        $buat->title = ucwords(strtolower(strip_tags($request->title)));
         $buat->message = $request->message;
         $buat->user_id = $request->account->id;
         $buat->save();
