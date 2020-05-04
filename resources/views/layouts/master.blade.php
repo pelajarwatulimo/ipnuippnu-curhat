@@ -136,7 +136,6 @@
             }, function(){
               OneSignal.getUserId(function(e){
                 mySession = e;
-                documentReady();
               });
             });
             @else
@@ -146,7 +145,6 @@
             }, function(){
               OneSignal.getUserId(function(e){
                 mySession = e;
-                documentReady();
               });
             });
             @endif
@@ -156,12 +154,14 @@
               appId: "{{ config('app.onesignal_appID') }}",
           });
           OneSignal.on('notificationPermissionChange', function(permissionChange) {
-            if(permissionChange.to) kirimTags();
+            kirimTags();
           });
                
           OneSignal.isPushNotificationsEnabled().then(function(isEnabled) {
             kirimTags();
           });
+
+          documentReady();
       });
     });
   </script>
