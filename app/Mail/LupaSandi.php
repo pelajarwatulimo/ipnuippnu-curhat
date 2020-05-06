@@ -2,7 +2,6 @@
 
 namespace App\Mail;
 
-use Crypt;
 use Carbon\Carbon;
 use Illuminate\Bus\Queueable;
 use Illuminate\Contracts\Queue\ShouldQueue;
@@ -31,12 +30,14 @@ class LupaSandi extends Mailable
      */
     public function build()
     {
-        $url = new \stdClass;
-        $url->token = $this->user->email;
-        $url->expired = Carbon::now()->add(1, 'day')->timestamp;
-        $url = Crypt::encrypt($url);
+        $data = new \stdClass;
+        $data->email = $this->user->email;
+        $data->expired = Carbon::now()->add(1, 'day')->timestamp;
+        $data->token = \Str::random(40);
+        $file = urlencode(base64_encode($data->email));
+        \Storage::disk('reset_pass')->put($file, json_encode($data));
 
-        $link = route('reset_pass.go', $url);
+        $link = route('reset_pass.go', $data->token . config('app.reset_pass_glue') . $file);
 
         return $this->subject('Lupa Kata Sandi')
             ->with('link', $link)

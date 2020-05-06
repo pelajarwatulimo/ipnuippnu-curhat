@@ -63,15 +63,15 @@
                           <label for="check{{ $key }}"></label>
                         </div>
                       </td>
-                      <td class="mailbox-name py-3 d-none d-md-table-cell">{{ \Custom::limit($curhat->title, 20) }}</td>
+                      <td class="mailbox-name py-3 d-none d-md-table-cell">{{ \Str::limit($curhat->title, 20) }}</td>
                       <td class="mailbox-subject py-3">
-                        <div class="d-block d-md-none">{{ \Custom::limit($curhat->title, 20) }}</div>
+                        <div class="d-block d-md-none">{{ \Str::limit($curhat->title, 13) }}</div>
                         @if ($curhat->last_message()->user->is_admin)
                             <img src="{{ asset('/assets/img/ig-trusted.png') }}" alt="Logo Admin" width="20">
                         @endif
                         {{ $curhat->last_message()->user->panggilan() }}
                         :
-                        {{  \Custom::limit(strip_tags($curhat->last_message()->message), 50 ) }}
+                        {{  \Str::limit(strip_tags($curhat->last_message()->message), 30 ) }}
                       </td>
                       <td class="mailbox-attachment py-3 d-none d-md-table-cell"></td>
                       <td class="mailbox-date text-right py-3">{{ $curhat->last_message()->created_at->diffForHumans() }}</td>

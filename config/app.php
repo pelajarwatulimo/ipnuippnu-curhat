@@ -15,11 +15,11 @@ return [
 
     'name' => 'Curhat Rekan & Rekanita',
     'author' => 'PAC IPNU & IPPNU Watulimo',
-    'license' => 'Lisensi Terbuka oleh PAC IPNU & IPPNU Watulimo',
-    'version' => '0.9.4-beta',
-    'akhiran_enkripsi' => 'lalisandine',
+    'license' => date('Y') . ' | PAC IPNU & IPPNU Watulimo',
+    'version' => '0.9.5-rc1',
     'onesignal_appID' => env('ONESIGNAL_APPID', null),
     'onesignal_keyAPI' => env('ONESIGNAL_KEYAPI', null),
+    'reset_pass_glue' => 'LO_O', //awas hati hati, gunakan karakter uniq
 
     /*
     |--------------------------------------------------------------------------
@@ -234,7 +234,6 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-        'Custom' => App\Helpers\Custom::class,
         'Image' => Intervention\Image\Facades\Image::class,
         'Captcha' => Mews\Captcha\Facades\Captcha::class,
 

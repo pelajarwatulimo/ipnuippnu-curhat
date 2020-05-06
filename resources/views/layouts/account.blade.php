@@ -4,8 +4,9 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-    <link rel="shortcut icon" href="{{ asset('/') }}favicon.ico" type="image/x-icon">
+  <meta name="robots" content="index, follow" />
+  <meta name="description" content="Laman yang digunakan untuk menyalurkan aspirasi, kritik, saran dan pesan kepada {{ config('app.author') }}">
+  <link rel="shortcut icon" href="{{ asset('/') }}favicon.ico" type="image/x-icon">
   <meta name="author" content="{{ config('app.author') }}">
   <title>@yield('title') | {{ config('app.name') }}</title>
   <meta name="theme-color" content="#1cc88a">
@@ -32,7 +33,7 @@
                   <div class="row">
                     <div class="col">
                       @if (session()->has('informasi'))
-                      <div class="alert alert-{{ session()->get('informasi')['type'] }} m-2" style="margin-bottom: -10px !important">{{ session()->get('informasi')['value'] }}</div>  
+                      <div class="alert alert-{{ session()->get('informasi')['type'] }} m-2" style="margin-bottom: -10px !important">{!! session()->get('informasi')['value'] !!}</div>  
                       @endif
                         
                       <div class="px-lg-5 py-lg-4 p-4">

@@ -23,7 +23,7 @@ class UmumController extends Controller
 
         if( \App\User::whereEmail($request->email)->count() !== 1 )
             return redirect()->back()->with('informasi', ['type' => 'warning', 'value'
-                => 'Email anda belum terdaftar pada basis data kami.']);
+                => 'Email anda belum terdaftar. Silahkan <a href="'. route('signup') .'" class="font-weight-bold text-success">Buat Akun</a> terlebih dahulu.']);
 
         if( auth()->attempt($request->only(['email', 'password']), $request->login_remember))
         {
@@ -32,16 +32,14 @@ class UmumController extends Controller
                 auth()->logout();
                 return redirect()->route('login')->with('informasi', [
                     'type' => 'danger',
-                    'value' => 'Mohon maaf, anda belum melakukan verifikasi email. Silahkan cek Pesan Masuk pada penyedia layanan email anda.']
+                    'value' => "Mohon maaf, anda belum melakukan verifikasi email. Silahkan cek Inbox <b>$request->email</b> anda (cek juga folder Spam)."]
                 );
             }
 
             auth()->logoutOtherDevices($request->password);
             event(new \App\Events\UserStateChanged(auth()->user()->remember_token, 'refresh'));
 
-            if( auth()->user()->is_admin )
-                return redirect()->route('admin.beranda');
-
+            if( auth()->user()->is_admin ) return redirect()->route('admin.beranda');
             else return redirect()->route('user.beranda');
         }
 
@@ -66,7 +64,10 @@ class UmumController extends Controller
             'sign-agree' => 'required',
             'sign-foto' => 'mimes:jpeg,jpg,JPG,png',
         ],[
-            'sign-email.unique' => 'Email tersebut sudah digunakan'
+            'sign-email.unique' => 'Email tersebut sudah digunakan. Silahkan '.
+            '<a href="'. route('login') .'">Masuk</a>'.
+            ' atau '.
+            '<a href="'. route('reset_pass') .'">Ubah Kata Sandi</a>'
         ]);
 
         $filename = "";
@@ -92,7 +93,7 @@ class UmumController extends Controller
 
         return redirect()->route('login')->with('informasi', [
             'type' => 'success',
-            'value' => 'Pendaftaran berhasil. Silahkan cek email anda.']
+            'value' => "Pendaftaran berhasil. Silahkan cek Inbox <b>$request->email</b> untuk melakukan verifikasi."]
         );
         
     }
@@ -113,7 +114,7 @@ class UmumController extends Controller
 
         return redirect()->route('login')->with('informasi', [
             'type' => 'success',
-            'value' => "Akun $account->name berhasil diaktivasi. Silahkan login."]
+            'value' => "Akun $account->name berhasil verifikasi. Silahkan login."]
         );
 
     }
@@ -166,8 +167,8 @@ class UmumController extends Controller
             'captcha' => 'required|captcha',
             'email' => 'required|exists:users,email'
         ],[
-            'email.exists' => 'Email tidak terdaftar',
-            'captcha.captcha' => 'Captcha tidak valid'
+            'email.exists' => 'Email belum didaftarkan',
+            'captcha.captcha' => 'Captcha tidak sesuai'
         ]);
 
         $account = \App\User::whereEmail($request->email)->get()->first();
@@ -176,35 +177,52 @@ class UmumController extends Controller
 
         return redirect()->route('login')->with('informasi', [
             'type' => 'success',
-            'value' => 'Alamat untuk mengatur ulang kata sandi telah kami kirim ke email anda']
+            'value' => "Silahkan cek inbox <b>$request->email</b> untuk mengatur kata sandi."]
         );
 
     }
 
     public function gantisandi(Request $request, $link)
     {
-        try{
-            $url = decrypt($link);
-        }
-        catch(DecryptException $e)
-        {
-            abort(403, 'Token tidak valid');
-        }
-        $email = $url->token;
-        
-        if( \App\User::whereEmail($email)->count() != 1 )
-        {
+        $kunci = explode(config('app.reset_pass_glue'), $link);
+        $kunci = array_reverse($kunci);
+        $kunci[0] = urlencode($kunci[0]);
+
+        if( !\Storage::disk('reset_pass')->exists($kunci[0]) )
             return redirect()->route('login')->with('informasi', [
                 'type' => 'warning',
-                'value' => 'Email anda sudah tidak aktif']
+                'value' => 'Alamat ubah kata sandi tidak tersedia atau sudah digunakan. Anda bisa melakukan '.
+                    '<a href="'. route('reset_pass') .'">permintaan ubah kata sandi</a> kembali.' ]
+            );
+        
+        $data = json_decode(\Storage::disk('reset_pass')->get($kunci[0]));
+        if( \App\User::whereEmail($data->email)->count() != 1 )
+        {
+            \Storage::disk('reset_pass')->delete($kunci[0]);
+            return redirect()->route('login')->with('informasi', [
+                'type' => 'warning',
+                'value' => "Akun anda belum diverifikasi. Silahkan cek pesan Verifikasi Akun pada inbox $email_parsed, ".
+                "coba juga cek folder <b>Spam</b>."]
             );
         }
-        
-        if( $url->expired <= time() )
+
+        if( $data->token !== $kunci[1] )
         {
+            \Storage::disk('reset_pass')->delete($kunci[0]);
             return redirect()->route('login')->with('informasi', [
                 'type' => 'warning',
-                'value' => 'Alamat untuk mengganti sandi sudah kadaluarsa']
+                'value' => 'Terdapat konflik pada kunci ubah kata sandi. Anda bisa melakukan '.
+                    '<a href="'. route('reset_pass') .'">permintaan ubah kata sandi</a> kembali.' ]
+            );
+        }
+
+        if( $data->expired <= time() )
+        {
+            \Storage::disk('reset_pass')->delete($kunci[0]);
+            return redirect()->route('login')->with('informasi', [
+                'type' => 'warning',
+                'value' => 'Alamat ubah kata sandi sudah kadaluarsa. Anda bisa melakukan '.
+                    '<a href="'. route('reset_pass') .'">permintaan ubah kata sandi</a> kembali.' ]
             );
         }
 
@@ -214,16 +232,18 @@ class UmumController extends Controller
                 'password' => 'required|min:8|confirmed',
             ]);
 
-            $user = \App\User::whereEmail($email)->get()->first();
+            $user = \App\User::whereEmail($data->email)->get()->first();
             $user->password = bcrypt($request->password);
             $user->save();
 
+            \Storage::disk('reset_pass')->delete($kunci[0]);
             return redirect()->route('login')->with('informasi', [
                 'type' => 'success',
                 'value' => 'Kata sandi berhasil diganti. Silahkan masuk.']
             );
         }
 
+        $email = $data->email;
         return view('set_pass', compact(['email', 'link']));
     }
 }

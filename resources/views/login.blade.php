@@ -12,18 +12,18 @@
 <form action="{{ route('login.post') }}" method="post" class="user">
   @csrf
   <div class="form-group">
-    <input type="email" class="form-control form-control-user{{ $errors->has('email') ? ' is-invalid' : '' }}" aria-describedby="emailHelp" placeholder="Masukkan alamat email" name="email" value="{{ old('email') }}">
+    <input type="email" class="form-control form-control-user{{ $errors->has('email') ? ' is-invalid' : '' }}" placeholder="Masukkan alamat email" name="email" value="{{ old('email') }}" required>
     <div class="invalid-feedback">
       {{ $errors->first('email') }}
     </div>
   </div>
   <div class="form-group m-0">
-    <input type="password" class="form-control form-control-user{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="Kata Sandi" name="password" value="">
+    <input type="password" class="form-control form-control-user{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="Kata Sandi" name="password" requi>
+    <div class="invalid-feedback float-left" style="width: inherit">
+      {{ $errors->first('password') }}
+    </div>
     <div class="text-right px-3">
-        <a class="small" href="{{ route('reset_pass') }}">Lupa kata sandi?</a>
-        <div class="invalid-feedback">
-          {{ $errors->first('password') }}
-        </div>
+      <a class="small" href="{{ route('reset_pass') }}">Lupa kata sandi?</a>
     </div>
   </div>
   <div class="form-group">

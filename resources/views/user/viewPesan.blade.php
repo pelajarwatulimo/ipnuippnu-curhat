@@ -131,8 +131,8 @@
           
           var data = stripHTML($('textarea').val());
 
-          $('textarea').val('');
-          var kunci = pesan(data);     
+          $('textarea').val('').css('height', 'unset');
+          var kunci = pesan(data);  
 
           $.ajax({
             method: "POST",

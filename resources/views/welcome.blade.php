@@ -3,6 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="robots" content="index, follow" />
+    <meta name="description" content="Laman yang digunakan untuk menyalurkan aspirasi, kritik, saran dan pesan kepada {{ config('app.author') }}">  
+    <meta name="author" content="{{ config('app.author') }}">
     <link rel="shortcut icon" href="{{ asset('/') }}favicon.ico" type="image/x-icon">
     <title>Selamat Datang | {{ config('app.name') }}</title>
     <link href="{{ asset('/') }}assets/vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">

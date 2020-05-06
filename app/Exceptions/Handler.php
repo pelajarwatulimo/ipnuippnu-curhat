@@ -50,6 +50,37 @@ class Handler extends ExceptionHandler
      */
     public function render($request, Throwable $exception)
     {
+        if($this->isHttpException($exception)){
+            switch ($exception->getStatusCode()) {
+                case 404:
+                    return response()->view('error', [
+                        "title" => "Halaman Tidak Ditemukan",
+                        "message" => 'Mohon maaf, kami tidak menemukan halaman yang diminta. Jika seharusnya ini tidak terjadi, anda dapat <a href="mailto:'.env('MAIL_FROM_ADDRESS').'">menghubungi kami</a>.',
+                        "code" => $exception->getStatusCode()
+                    ], $exception->getStatusCode());
+                    break;
+                case 419:
+                    return response()->view('error', [
+                        "title" => "Permintaan Kadaluarsa",
+                        "message" => 'Sepertinya anda <b>stay</b> terlalu lama. Silahkan tekan tombol <b>Kembali<b> atau anda dapat <a href="mailto:'.env('MAIL_FROM_ADDRESS').'">menghubungi kami</a>.',
+                        "code" => $exception->getStatusCode()
+                    ], $exception->getStatusCode());
+                    break;
+                case 500:
+                    return response()->view('error', [
+                        "title" => "Kesalahan Internal",
+                        "message" => 'Terjadi Kesalahan. Silahkan <a href="mailto:'.env('MAIL_FROM_ADDRESS').'">menghubungi kami</a> untuk memperbaiki masalah ini.',
+                        "code" => $exception->getStatusCode()
+                    ], $exception->getStatusCode());
+                    break;
+                default:
+                    return response()->view('error', [
+                        "title" => "Hmm...",
+                        "message" => 'Terjadi Kesalahan. Silahkan <a href="mailto:'.env('MAIL_FROM_ADDRESS').'">menghubungi kami</a> untuk memperbaiki masalah ini.',
+                    ], $exception->getStatusCode());
+                    break;
+            }
+        }
         return parent::render($request, $exception);
     }
 }

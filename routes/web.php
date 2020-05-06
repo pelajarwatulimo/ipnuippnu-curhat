@@ -22,9 +22,7 @@ Route::group(['middleware' => ['guest']], function () {
     Route::get('/signup', 'UmumController@get_signup')->name('signup');
     Route::post('/signup', 'UmumController@post_signup');
     Route::get('/verifikasi', 'UmumController@get_verifikasi')->name('signup.verify');
-    Route::get('/reset_pass', function(){
-        return view('reset_pass');
-    })->name('reset_pass');
+    Route::get('/reset_pass', function(){ return view('reset_pass'); })->name('reset_pass');
     Route::post('/reset_pass', 'UmumController@post_reset');
     Route::any('/reset_pass/{code}', 'UmumController@gantisandi')->name('reset_pass.go');
 

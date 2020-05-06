@@ -205,7 +205,7 @@ class AdminController extends Controller
         $pesan->save();
 
         OneSignal::sendNotificationToAll(
-            strip_tags(\Custom::limit($pesan->message, 30)), 
+            strip_tags(\Str::limit($pesan->message, 30)), 
             $url = route('broadcast', $pesan->slug), 
             $data = null, 
             $buttons = null, 

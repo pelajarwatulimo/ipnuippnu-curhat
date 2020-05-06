@@ -11,13 +11,13 @@
 <form action="{{ route('reset_pass.go', $link) }}" method="post" class="user mb-4" autocomplete="off">
   @csrf
   <div class="form-group">
-    <input type="password" class="form-control form-control-user{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="Masukkan kata sandi yang baru" name="password" autocomplete="off">
+    <input type="password" class="form-control form-control-user{{ $errors->has('password') ? ' is-invalid' : '' }}" placeholder="Masukkan kata sandi yang baru" name="password" autocomplete="off" required>
     <div class="invalid-feedback">
       {{ $errors->first('password') }}
     </div>
   </div>
   <div class="form-group">
-    <input type="password" class="form-control form-control-user{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}" placeholder="Ulangi kata sandi" name="password_confirmation" autocomplete="off">
+    <input type="password" class="form-control form-control-user{{ $errors->has('password_confirmation') ? ' is-invalid' : '' }}" placeholder="Ulangi kata sandi" name="password_confirmation" autocomplete="off" required>
     <div class="invalid-feedback">
       {{ $errors->first('password_confirmation') }}
     </div>

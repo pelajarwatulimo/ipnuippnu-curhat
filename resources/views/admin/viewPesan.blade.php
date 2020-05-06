@@ -130,7 +130,7 @@
           
           var data = stripHTML($('textarea').val());
 
-          $('textarea').val('');
+          $('textarea').val('').css('height', 'unset');
           pesan(data,kunci);     
 
           $.ajax({

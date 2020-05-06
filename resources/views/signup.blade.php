@@ -34,7 +34,7 @@
     <label for="sign-email" class="mb-1">Alamat Email</label>
     <input type="email" class="form-control{{ $errors->has('sign-email') ? ' is-invalid' : '' }}" id="sign-email" name="sign-email" minlength="5" required value="{{ old('sign-email') }}">
     <div class="invalid-feedback">
-      {{ $errors->first('sign-email') }}
+      {!! $errors->first('sign-email') !!}
     </div>
   </div>
   <div class="form-group">
