@@ -103,12 +103,16 @@ class UmumController extends Controller
     public function get_verifikasi(Request $request)
     {
         if( empty($request->token) )
+            abort(404);
+
+        try {
+            $email = \Crypt::decrypt(request('token'));
+        } catch (DecryptException $e) {
             return redirect()->route('login')->with('informasi', [
                 'type' => 'warning',
-                'value' => "Permintaan aktivasi tidak dapat dijalankan."]
+                'value' => "Alamat verifikasi tidak valid."]
             );
-
-        $email = \Crypt::decrypt(request('token'));
+        }
         $account = \App\User::whereEmail($email)->first();
 
         if( $account->email_verified_at )
