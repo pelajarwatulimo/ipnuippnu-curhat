@@ -10,7 +10,7 @@ return [
     "bokong",
     "celeh",
     "coli",
-    " cok",
+    "cok",
     "crot",
     "dancok",
     "djancok",

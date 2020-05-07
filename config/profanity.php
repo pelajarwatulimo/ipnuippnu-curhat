@@ -11,7 +11,7 @@ return [
     */
 
     /* Disable to replace partial words. */
-    'replaceFullWords' => false,
+    'replaceFullWords' => true,
 
     /* Replace bad words with this, based on length of word */
     'replaceWith' => '*',
