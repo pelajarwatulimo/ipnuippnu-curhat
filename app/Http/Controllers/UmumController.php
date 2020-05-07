@@ -103,13 +103,19 @@ class UmumController extends Controller
     public function get_verifikasi(Request $request)
     {
         if( empty($request->token) )
-            abort(404);
+            return redirect()->route('login')->with('informasi', [
+                'type' => 'warning',
+                'value' => "Permintaan aktivasi tidak dapat dijalankan."]
+            );
 
         $email = \Crypt::decrypt(request('token'));
         $account = \App\User::whereEmail($email)->first();
 
         if( $account->email_verified_at )
-            abort(404);
+            return redirect()->route('login')->with('informasi', [
+                'type' => 'warning',
+                'value' => "Verifikasi akun tidak diperlukan karena $email sudah diaktifkan. Silahkan masuk."]
+            );
 
         $account->email_verified_at = \Carbon\Carbon::now();
         $account->save();
