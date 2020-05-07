@@ -57,7 +57,7 @@ class UmumController extends Controller
     public function post_signup(Request $request)
     {
         $this->validate($request, [
-            'sign-nama' => 'required|min:3',
+            'sign-nama' => 'required|min:3|profanity',
             'sign-email' => 'required|email|unique:users,email',
             'sign-ranting' => 'required|exists:ranting,id',
             'sign-pass' => 'required|min:8',
@@ -65,9 +65,11 @@ class UmumController extends Controller
             'sign-foto' => 'mimes:jpeg,jpg,JPG,png',
         ],[
             'sign-email.unique' => 'Email tersebut sudah digunakan. Silahkan '.
-            '<a href="'. route('login') .'">Masuk</a>'.
-            ' atau '.
-            '<a href="'. route('reset_pass') .'">Ubah Kata Sandi</a>'
+                '<a href="'. route('login') .'">Masuk</a>'.
+                ' atau '.
+                '<a href="'. route('reset_pass') .'">Ubah Kata Sandi</a>',
+
+            'sign-nama.profanity' => "Nama mengandung kata kotor."
         ]);
 
         $filename = "";
