@@ -169,6 +169,7 @@
           
           if( $('.direct-chat-msg[kunci="'+data.message.kunci+'"]').length == 0 )
           {
+            $('audio')[0].play();
             data = data.message;
             if( data.is_admin == 1 )
             {
@@ -204,6 +205,7 @@
 @endif
 
 @section('content')
+<audio src="{{ asset('assets/audio/ping.mp3') }}" class="d-none"></audio>
 <!-- Main content -->
 <section class="content pt-3">
 @if (empty($pesan))

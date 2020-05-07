@@ -170,6 +170,7 @@
           
           if( $('.direct-chat-msg[kunci="'+data.message.kunci+'"]').length == 0 )
           {
+            $('audio')[0].play();
             data = data.message;
             pesan(data.message, false, data.name, data.created_at, data.avatar, data.kunci );
             $.ajax({
@@ -208,6 +209,7 @@
 
 @section('content')
 <!-- Main content -->
+<audio src="{{ asset('assets/audio/ping.mp3') }}" class="d-none"></audio>
 <section class="content pt-3">
 @if (empty($pesan))
 <div class="error-page">
