@@ -93,7 +93,7 @@ class UmumController extends Controller
 
         return redirect()->route('login')->with('informasi', [
             'type' => 'success',
-            'value' => "Pendaftaran berhasil. Silahkan cek Inbox <b>$request->email</b> untuk melakukan verifikasi."]
+            'value' => "Pendaftaran berhasil. Silahkan cek Inbox <b>$request->email</b> untuk melakukan verifikasi. Jika belum ada, tunggu hingga 5 menit."]
         );
         
     }

@@ -23,9 +23,13 @@ class Message extends Model
     {
         if( $this->message_answer->count() > 0 )
         {
-            return $this->message_answer->last();
+            $return = $this->message_answer->last();
+            $return['message'] = app('profanityFilter')->filter($return['message']);
+            return $return;
         }
-        
-        return $this;
+
+        $return = $this;
+        $return['message'] = app('profanityFilter')->filter($return['message']);
+        return $return;
     }
 }

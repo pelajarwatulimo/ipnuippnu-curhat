@@ -1,5 +1,53 @@
 [
     {
+        "name": "askedio/laravel5-profanity-filter",
+        "version": "1.10",
+        "version_normalized": "1.10.0.0",
+        "source": {
+            "type": "git",
+            "url": "https://github.com/Askedio/laravel-profanity-filter.git",
+            "reference": "34bec8cd92e998015e73a90d888ef981b0ed749a"
+        },
+        "dist": {
+            "type": "zip",
+            "url": "https://api.github.com/repos/Askedio/laravel-profanity-filter/zipball/34bec8cd92e998015e73a90d888ef981b0ed749a",
+            "reference": "34bec8cd92e998015e73a90d888ef981b0ed749a",
+            "shasum": ""
+        },
+        "require": {
+            "php": ">=5.5.9"
+        },
+        "require-dev": {
+            "laravel/laravel": "5.*",
+            "phpunit/phpunit": "~5.0",
+            "symfony/css-selector": "3.1.*",
+            "symfony/dom-crawler": "3.1.*"
+        },
+        "time": "2018-10-19T16:07:02+00:00",
+        "type": "library",
+        "extra": {
+            "laravel": {
+                "providers": [
+                    "Askedio\\Laravel5ProfanityFilter\\Providers\\ProfanityFilterServiceProvider"
+                ]
+            }
+        },
+        "installation-source": "dist",
+        "autoload": {
+            "psr-4": {
+                "Askedio\\Laravel5ProfanityFilter\\": "app/"
+            }
+        },
+        "notification-url": "https://packagist.org/downloads/",
+        "license": [
+            "AGPL-3.0"
+        ],
+        "description": "A Vendor Package Example",
+        "keywords": [
+            "laravel"
+        ]
+    },
+    {
         "name": "asm89/stack-cors",
         "version": "1.3.0",
         "version_normalized": "1.3.0.0",

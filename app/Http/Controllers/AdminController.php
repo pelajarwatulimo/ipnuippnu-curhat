@@ -53,7 +53,7 @@ class AdminController extends Controller
         $aciap->id = $balasan->message_id;
         $aciap->name = $balasan->user->name;
         $aciap->avatar = $balasan->user->avatar ?: 'default.jpg';
-        $aciap->message = $balasan->message;
+        $aciap->message = app('profanityFilter')->filter($balasan->message);
         $aciap->created_at = $balasan->updated_at->format('d M h:i a');
         $aciap->kunci = $request->client_id;
         $aciap->answer_id = $balasan->id;
@@ -63,7 +63,8 @@ class AdminController extends Controller
 
         $response = [
             'time' => $balasan->updated_at->format('d M h:i a'),
-            'client_id' => $request->client_id
+            'client_id' => $request->client_id,
+            'message' => app('profanityFilter')->filter($balasan->message),
         ];
 
         return response()->json($response, 200);

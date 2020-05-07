@@ -41,7 +41,6 @@ class ComposerStaticInit283c9039c8f013b0328f08ffa8ef5ea1
         'T' => 
         array (
             'TijsVerkoyen\\CssToInlineStyles\\' => 31,
-            'Tests\\' => 6,
         ),
         'S' => 
         array (
@@ -139,6 +138,7 @@ class ComposerStaticInit283c9039c8f013b0328f08ffa8ef5ea1
         'A' => 
         array (
             'Asm89\\Stack\\' => 12,
+            'Askedio\\Laravel5ProfanityFilter\\' => 32,
             'App\\' => 4,
         ),
     );
@@ -159,10 +159,6 @@ class ComposerStaticInit283c9039c8f013b0328f08ffa8ef5ea1
         'TijsVerkoyen\\CssToInlineStyles\\' => 
         array (
             0 => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src',
-        ),
-        'Tests\\' => 
-        array (
-            0 => __DIR__ . '/../..' . '/tests',
         ),
         'Symfony\\Polyfill\\Php73\\' => 
         array (
@@ -384,6 +380,10 @@ class ComposerStaticInit283c9039c8f013b0328f08ffa8ef5ea1
         array (
             0 => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack',
         ),
+        'Askedio\\Laravel5ProfanityFilter\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/askedio/laravel5-profanity-filter/app',
+        ),
         'App\\' => 
         array (
             0 => __DIR__ . '/../..' . '/app',
@@ -422,8 +422,9 @@ class ComposerStaticInit283c9039c8f013b0328f08ffa8ef5ea1
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Ranting' => __DIR__ . '/../..' . '/app/Ranting.php',
-        'App\\ResetPassword' => __DIR__ . '/../..' . '/app/ResetPassword.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
+        'Askedio\\Laravel5ProfanityFilter\\ProfanityFilter' => __DIR__ . '/..' . '/askedio/laravel5-profanity-filter/app/ProfanityFilter.php',
+        'Askedio\\Laravel5ProfanityFilter\\Providers\\ProfanityFilterServiceProvider' => __DIR__ . '/..' . '/askedio/laravel5-profanity-filter/app/Providers/ProfanityFilterServiceProvider.php',
         'Asm89\\Stack\\Cors' => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack/Cors.php',
         'Asm89\\Stack\\CorsService' => __DIR__ . '/..' . '/asm89/stack-cors/src/Asm89/Stack/CorsService.php',
         'Berkayk\\OneSignal\\OneSignalClient' => __DIR__ . '/..' . '/berkayk/onesignal-laravel/src/OneSignalClient.php',
@@ -3191,10 +3192,6 @@ class ComposerStaticInit283c9039c8f013b0328f08ffa8ef5ea1
         'Symfony\\Polyfill\\Mbstring\\Mbstring' => __DIR__ . '/..' . '/symfony/polyfill-mbstring/Mbstring.php',
         'Symfony\\Polyfill\\Php72\\Php72' => __DIR__ . '/..' . '/symfony/polyfill-php72/Php72.php',
         'Symfony\\Polyfill\\Php73\\Php73' => __DIR__ . '/..' . '/symfony/polyfill-php73/Php73.php',
-        'Tests\\CreatesApplication' => __DIR__ . '/../..' . '/tests/CreatesApplication.php',
-        'Tests\\Feature\\ExampleTest' => __DIR__ . '/../..' . '/tests/Feature/ExampleTest.php',
-        'Tests\\TestCase' => __DIR__ . '/../..' . '/tests/TestCase.php',
-        'Tests\\Unit\\ExampleTest' => __DIR__ . '/../..' . '/tests/Unit/ExampleTest.php',
         'TijsVerkoyen\\CssToInlineStyles\\CssToInlineStyles' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/CssToInlineStyles.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Processor.php',
         'TijsVerkoyen\\CssToInlineStyles\\Css\\Property\\Processor' => __DIR__ . '/..' . '/tijsverkoyen/css-to-inline-styles/src/Css/Property/Processor.php',

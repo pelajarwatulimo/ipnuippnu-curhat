@@ -144,6 +144,7 @@
               title: 'Pengiriman balasan berhasil'
             });
             $('.direct-chat-msg[kunci="'+msg.client_id+'"]').find('.float-left').html(msg.time);
+            $('.direct-chat-msg[kunci="'+msg.client_id+'"]').find('.direct-chat-text').html(msg.message);
           }).fail(function( msg ) {
             Toast.fire({
               icon: 'error',
@@ -246,7 +247,7 @@
                       </div>
                       <img class="direct-chat-img" src="{{ asset('data/users_img/default.jpg') }}" alt="Message User Image">
                       <div class="direct-chat-text">
-                        {!! $pesan->message !!}
+                        {!! app('profanityFilter')->filter($pesan->message) !!}
                       </div>
                     </div>
 
@@ -259,7 +260,7 @@
                         </div>
                         <img class="direct-chat-img" src="{{ asset('data/users_img/'.$balasan->user->avatar()) }}" alt="Message User Image">
                         <div class="direct-chat-text">
-                          {!! $balasan->message !!}
+                          {!! app('profanityFilter')->filter($balasan->message) !!}
                         </div>
                       </div>
                       @else
@@ -270,7 +271,7 @@
                         </div>
                         <img class="direct-chat-img" src="{{ asset('data/users_img/'.$balasan->user->avatar()) }}" alt="Message User Image">
                         <div class="direct-chat-text">
-                          {!! $balasan->message !!}
+                          {!! app('profanityFilter')->filter($balasan->message) !!}
                         </div>
                       </div>
                       @endif

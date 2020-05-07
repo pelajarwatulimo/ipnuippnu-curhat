@@ -16,7 +16,7 @@ return [
     'name' => 'Curhat Rekan & Rekanita',
     'author' => 'PAC IPNU & IPPNU Watulimo',
     'license' => date('Y') . ' | PAC IPNU & IPPNU Watulimo',
-    'version' => '0.9.5-rc1',
+    'version' => '0.9.6-rc2',
     'onesignal_appID' => env('ONESIGNAL_APPID', null),
     'onesignal_keyAPI' => env('ONESIGNAL_KEYAPI', null),
     'reset_pass_glue' => 'LO_O', //awas hati hati, gunakan karakter uniq

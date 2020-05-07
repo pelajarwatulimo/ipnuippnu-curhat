@@ -40,8 +40,8 @@ class ApiController extends Controller
     public function newpesan(Request $request)
     {
         $validator = \Validator::make($request->only(['message', 'title']),[
-            'message' => 'required|max:50',
-            'title' => 'required'
+            'message' => 'required',
+            'title' => 'required|max:50'
         ]);
         if( $validator->fails() )
             return response()->json([
@@ -127,6 +127,6 @@ class ApiController extends Controller
         return response()->json([
             'status' => 'success',
             'data' => \App\Message::where(['user_id' => $request->account->id])->with('message_answer.user')->get()
-        ], 200, $headers);
+        ], 200);
     }
 }
