@@ -81,11 +81,11 @@ class UmumController extends Controller
             $img->fit(500);
             $img->save(public_path() . '/data/users_img/' . $filename);
         }
-        
 
         $account = new \App\User;
         $account->name = ucwords(strtolower($request->{'sign-nama'}));
         $account->email = $request->{'sign-email'};
+        $account->remember_token = \Str::random(60);
         $account->ranting = \App\Ranting::find($request->{'sign-ranting'})->name;
         $account->password = bcrypt($request->{'sign-pass'});
         $account->avatar = $filename ?: null;
