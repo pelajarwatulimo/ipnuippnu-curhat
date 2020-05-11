@@ -153,11 +153,14 @@
 				<h1>:(</h1>
 			</div>
 			<h2>{{ $code }} - Astaghfirullah</h2>
-      <p>{!! $message !!}</p>
-      <div class="action">
+	  <p>{!! $message !!}</p>
+	  
+	  @if($code !== 503) 
+	  <div class="action">
         <a href="#kembali" class="btn" id="kembali">Kembali</a>
         <a href="{{ config('app.url') }}" class="btn inverse">Beranda</a>
-      </div>
+	  </div>
+	  @endif
 		</div>
   </div>
   

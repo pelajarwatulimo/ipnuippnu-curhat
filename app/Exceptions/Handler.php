@@ -73,10 +73,18 @@ class Handler extends ExceptionHandler
                         "code" => $exception->getStatusCode()
                     ], $exception->getStatusCode());
                     break;
+                case 503:
+                    return response()->view('error', [
+                        "title" => "Mohon Maaf",
+                        "message" => 'Mohon maaf, layanan sedang dinonaktifkan dalam beberapa waktu untuk peningkatan beberapa layanan. Silahkan kembali lagi nanti.',
+                        "code" => $exception->getStatusCode()
+                    ], $exception->getStatusCode());
+                    break;
                 default:
                     return response()->view('error', [
                         "title" => "Hmm...",
                         "message" => 'Terjadi Kesalahan. Silahkan <a href="mailto:'.env('MAIL_FROM_ADDRESS').'">menghubungi kami</a> untuk memperbaiki masalah ini.',
+                        "code" => $exception->getStatusCode()
                     ], $exception->getStatusCode());
                     break;
             }
