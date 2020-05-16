@@ -23,7 +23,8 @@ class UmumController extends Controller
 
         if( \App\User::whereEmail($request->email)->count() !== 1 )
             return redirect()->back()->with('informasi', ['type' => 'warning', 'value'
-                => 'Email anda belum terdaftar. Silahkan <a href="'. route('signup') .'" class="font-weight-bold text-success">Buat Akun</a> terlebih dahulu.']);
+                => 'Email anda belum terdaftar. Silahkan <a href="'. route('signup') .'" class="font-weight-bold text-success">Buat Akun</a> terlebih dahulu.']
+            )->withInput($request->all());
 
         if( auth()->attempt($request->only(['email', 'password']), $request->login_remember))
         {
@@ -33,7 +34,7 @@ class UmumController extends Controller
                 return redirect()->route('login')->with('informasi', [
                     'type' => 'danger',
                     'value' => "Mohon maaf, anda belum melakukan verifikasi email. Silahkan cek Inbox <b>$request->email</b> anda (cek juga folder Spam)."]
-                );
+                )->withInput($request->all());
             }
 
             auth()->logoutOtherDevices($request->password);
@@ -44,7 +45,7 @@ class UmumController extends Controller
         }
 
         return redirect()->back()->with('informasi', ['type' => 'warning', 'value'
-            => 'Kata sandi salah, silahkan coba lagi.']);
+            => 'Kata sandi salah, silahkan coba lagi.'])->withInput($request->all());
 
     }
 

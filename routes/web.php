@@ -11,6 +11,18 @@ use Illuminate\Support\Facades\Route;
 | contains the "web" middleware group. Now create something great!
 |
 */
+Route::get('/install', function(){
+    if( \Schema::hasTable('migrations') )
+        return abort(404);
+
+    Artisan::call('migrate', array('--force' => true));
+    return redirect()->route('login')->with('informasi', [
+        'type' => 'success',
+        'value' => 'Instalasi berhasil, silahkan masuk.<br/>
+                    Email : <b>admin@curhat.com</b><br/>
+                    Password : <b>lalisandine</b>'
+    ]);
+});
 
 Route::view('/', 'welcome')->name('beranda');
 Route::get('/b/{slug}', 'UmumController@get_broadcast')->name('broadcast');
@@ -70,3 +82,5 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/logout', 'UmumController@logout')->name('logout');
 
 });
+
+Route::view('/test', 'test');
