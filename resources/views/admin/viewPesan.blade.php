@@ -199,6 +199,8 @@
             }
         });
 
+        $('#loading-chat').fadeOut();
+
       })
     </script>
 @endsection
