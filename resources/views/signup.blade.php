@@ -64,7 +64,7 @@
   </div>
   <div class="form-group">
     <label for="sign-foto">Pilih Foto profil</label>
-    <input type="file" class="form-control-file" id="sign-foto" name="sign-foto">
+    <input type="file" class="form-control-file" id="sign-foto" name="sign-foto" accept="image/*">
   </div>
   <div class="form-group mt-4">
     <div class="custom-control custom-checkbox">
