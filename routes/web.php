@@ -82,5 +82,3 @@ Route::group(['middleware' => ['auth']], function () {
     Route::post('/logout', 'UmumController@logout')->name('logout');
 
 });
-
-Route::view('/test', 'test');

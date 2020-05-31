@@ -156,7 +156,7 @@
             // Enable pusher logging - don't include this in production
         Pusher.logToConsole = true;
 
-        var pusher = new Pusher('{{ env("PUSHER_APP_KEY") }}', {
+        var pusher = new Pusher('{{ config('app.pusher_key') }}', {
           cluster: 'ap1',
           forceTLS: true
         });
@@ -184,6 +184,7 @@
         });
 
         channel.bind('{{ auth()->user()->remember_token }}', function(e){
+          console.log(e);
           if( e.action == 'refresh' )
           {
             location.href = "";

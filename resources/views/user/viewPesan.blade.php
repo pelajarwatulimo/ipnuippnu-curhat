@@ -155,7 +155,7 @@
             })
 
             // === PUSHER ===========================================
-            var pusher = new Pusher('{{ env("PUSHER_APP_KEY") }}', {
+            var pusher = new Pusher('{{ config('app.pusher_key') }}', {
             cluster: 'ap1',
             forceTLS: true
             });
