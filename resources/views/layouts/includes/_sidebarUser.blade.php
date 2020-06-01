@@ -20,7 +20,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="../gallery.html" class="nav-link disabled text-secondary">
+          <a href="#development" class="nav-link text-secondary">
             <i class="nav-icon far fa-calendar-alt"></i>
             <p>
               Agenda Bulan Ini
@@ -28,7 +28,7 @@
           </a>
         </li>
         <li class="nav-item">
-          <a href="#" class="nav-link disabled text-secondary">
+          <a href="#development" class="nav-link text-secondary">
             <i class="nav-icon far fa-address-card"></i>
             <p>
               Pengajuan KTA

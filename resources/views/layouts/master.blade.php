@@ -22,6 +22,15 @@
     var mySession = "";
     $(document).ready(function(){
 
+      $('a[href="#development"]').click(function(e){
+          e.preventDefault();
+          Swal.fire(
+              'Mohon Maaf!',
+              "Fitur masih dalam pengembangan, akan tersedia dalam waktu dekat.",
+              'info'
+          );
+      });
+
       // OneSignal setup
       OneSignal.push(function(){
         OneSignal.init({appId: "<?= config('app.onesignal_appID') ?>" });

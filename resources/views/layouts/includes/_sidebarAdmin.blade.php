@@ -46,6 +46,14 @@
         </li>
         <li class="nav-header">LAINNYA</li>
         <li class="nav-item">
+          <a href="{{ route('admin.setting') }}" class="nav-link{{ Route::currentRouteName() == 'admin.setting' ? ' active' : '' }}">
+            <i class="nav-icon fas fa-cog"></i>
+            <p>
+              Pengaturan Aplikasi
+            </p>
+          </a>
+        </li>
+        <li class="nav-item">
           <a href="{{ route('admin.sysinfo') }}" class="nav-link{{ Route::currentRouteName() == 'admin.sysinfo' ? ' active' : '' }}">
             <i class="nav-icon fab fa-php"></i>
             <p>

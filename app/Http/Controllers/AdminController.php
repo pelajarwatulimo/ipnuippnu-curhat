@@ -221,4 +221,32 @@ class AdminController extends Controller
         
     }
 
+    public function post_setting($action)
+    {
+        if( $action == "fresh" )
+        {
+            \Artisan::call('cache:clear');
+            \Artisan::call('config:clear');
+            \Artisan::call('route:clear');
+            return redirect()->back()->with('informasi', [
+                'type' => 'success',
+                'value' => "Aplikasi berhasil disegarkan"
+            ]);
+        }
+
+        if( $action == "migrate" )
+        {
+            \Artisan::call('migrate', array('--force' => true));
+            return redirect()->back()->with('informasi', [
+                'type' => 'success',
+                'value' => "Migrasi database berhasil"
+            ]);
+        }
+
+        return redirect()->back()->with('informasi', [
+            'type' => 'warning',
+            'value' => "Perintah \"Artisan\" tidak dikenali"
+        ]);
+    }
+
 }

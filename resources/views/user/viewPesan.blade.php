@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="robots" content="noindex, nofollow">
+    <meta name="theme-color" content="#27ae60">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Chatting... | {{ config('app.name') }}</title>
     <link rel="stylesheet" href="{{ asset('assets/vendor/bootstrap/css/bootstrap.min.css') }}">
@@ -17,9 +18,21 @@
          <div class="row h-100">
              <div class="col-lg-3" id="body-kiri">
                 <div class="expand d-lg-none" sliding="false"><i class="fas fa-angle-right m-auto"></i></div>
-                <a href="{{ route('user.beranda') }}" class="item">
+                <a href="{{ route('user.beranda') }}" class="item mb-3">
                     <i class="fas fa-chevron-circle-left mr-1"></i>
-                    Kembali
+                    Back to Kotak Masuk
+                </a>
+                <a href="#development" class="item">
+                    <i class="far fa-calendar-alt mr-1"></i>
+                    Agenda Bulan Ini
+                </a>
+                <a href="#development" class="item">
+                    <i class="far fa-address-card mr-1"></i>
+                    Pengajuan KTA
+                </a>
+                <a href="{{ route('user.info') }}" class="item">
+                    <i class="far fa-question-circle mr-1"></i>
+                    Tentang Kami
                 </a>
              </div>
              <div class="col-12 col-lg-9 h-100" id="body-kanan">
@@ -29,7 +42,13 @@
                     </span>
                     <abbr class="judul h6 ml-3 my-auto" title="{{ strip_tags($pesan['message']) }}">{{ strip_tags($pesan['message']) }}</abbr>
                 </div>
-                <div id="chats">
+                <div id="chats" style="overflow: hidden">
+                    <div class="loading">
+                        <h3 class="m-auto text-white pb-5 text-center">
+                            <div class="display-3 mb-0"><i class="fas fa-circle-notch fa-spin"></i></div>
+                            <small style="font-size: 14px">Sedang menghubungi doi, eh server ding...</small>
+                        </h3>
+                    </div>
                     @if( $pesan->message_answer->count() )
                         @foreach ($pesan->message_answer as $balasan)
                             <div class="chat{{ $balasan->user->is_admin ? '' : ' kanan' }}">
@@ -60,6 +79,8 @@
     <script src="{{ asset('/assets/vendor/sweetalert2/sweetalert2.all.min.js') }}"></script>
     <script src="https://js.pusher.com/5.1/pusher.min.js"></script>
     <script>
+        var double_ready = false; // Untuk melakukan persiapan total
+
         $.fn.animateRotate = function(angle, duration, easing, complete) {
             var args = $.speed(duration, easing, complete);
             var step = args.step;
@@ -111,6 +132,21 @@
             return true;
         }
 
+        function siap()
+        {
+            if( !double_ready )
+            {
+                double_ready = true;
+                return false;
+            }
+
+            $('#chats .loading').fadeOut('slow', function(){
+                $('#chats').removeAttr('style');
+                $('#chats').animate({ scrollTop: $('#chats').prop("scrollHeight")}, 0);
+            });
+            return true;
+        }
+
         $(document).ready(function(){
             // GRETING, Tujuannya first action agar audio bisa play otomatis
             var d = new Date();
@@ -129,9 +165,10 @@
                 'Assalamu\'alaikum',
                 greeting,
                 'info'
-            );
+            ).then(function(){
+                setTimeout(siap,200);
+            });
             // ============= GRETING ===================================
-            $('#chats').animate({ scrollTop: $('#chats').prop("scrollHeight")}, 0);
             $('#body-kiri .expand').click(function(){
                 if($(this).attr('sliding') == "false")
                 {
@@ -154,6 +191,15 @@
                 $('#body-kiri .expand').click();
             })
 
+            $('a[href="#development"]').click(function(e){
+                e.preventDefault();
+                Swal.fire(
+                    'Mohon Maaf!',
+                    "Fitur masih dalam pengembangan, akan tersedia dalam waktu dekat.",
+                    'info'
+                );
+            });
+
             // === PUSHER ===========================================
             var pusher = new Pusher('{{ config('app.pusher_key') }}', {
             cluster: 'ap1',
@@ -162,14 +208,13 @@
 
             var channel = pusher.subscribe('CurhatRekanRekanita');
             pusher.connection.bind('connected', function() {
-            $('#loading-chat').fadeOut('slow');
+                siap();
             });
             channel.bind('TerimaBalasan-{{ $pesan->id }}', function(data) {
-                console.log(data);
 
             if( $('.chat[chat-key="'+data.message.kunci+'"]').length == 0 )
             {
-                $('audio')[0].play();
+                $('audio')[0].currentTime = 0; $('audio')[0].play();
 
                 data = data.message;
                 if( data.is_admin == 0 )

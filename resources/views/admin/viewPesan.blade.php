@@ -169,7 +169,7 @@
           
           if( $('.direct-chat-msg[kunci="'+data.message.kunci+'"]').length == 0 )
           {
-            $('audio')[0].play();
+            $('audio')[0].currentTime = 0; $('audio')[0].play();
             data = data.message;
             if( data.is_admin == 1 )
             {

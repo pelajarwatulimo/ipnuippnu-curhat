@@ -77,6 +77,9 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('broadcast', 'AdminController@get_broadcast')->name('admin.broadcast');
         Route::post('broadcast', 'AdminController@post_broadcast');
 
+        Route::view('/setting', 'admin.setting')->name('admin.setting');
+        Route::get('/setting/{aksi}', 'AdminController@post_setting')->name('admin.setting.aksi');
+
     });
 
     Route::post('/logout', 'UmumController@logout')->name('logout');

@@ -57,6 +57,16 @@ body, html{
     > #chats{
         overflow: auto;
         height: calc(100% - 72px - 50px);
+        position: relative;
+
+        > .loading{
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            bottom: 0;
+            display: flex;
+            background: #2c3e50b3;
+        }
 
         > .no-message{
             font-size: 13px;

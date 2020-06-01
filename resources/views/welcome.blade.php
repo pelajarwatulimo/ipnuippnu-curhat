@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="robots" content="index, follow" />
-    <meta name="description" content="Laman yang digunakan untuk menyalurkan aspirasi, kritik, saran dan pesan kepada {{ config('app.author') }}">  
+    <meta name="description" content="Website Cuhat Rekan dan Rekanita ini digunakan untuk menyalurkan aspirasi, kritik, saran dan pesan kepada PAC IPNU dan IPPNU Watulimo.">  
     <meta name="author" content="{{ config('app.author') }}">
     <link rel="shortcut icon" href="{{ asset('/') }}favicon.ico" type="image/x-icon">
     <title>Selamat Datang | {{ config('app.name') }}</title>
