@@ -9,6 +9,14 @@ class Message extends Model
     protected $dates = ['created_at', 'updated_at'];
     protected $fillable = ['message', 'created_at', 'updated_at'];
 
+    public static function boot() {
+        parent::boot();
+
+        static::deleting(function($user) {
+             $user->message_answer()->delete();
+        });
+    }
+
     public function user()
     {
         return $this->belongsTo(User::class);

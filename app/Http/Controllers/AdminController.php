@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use OneSignal;
+use App\SystemLog as Lapor;
 
 class AdminController extends Controller
 {
@@ -86,6 +87,7 @@ class AdminController extends Controller
         $data->name = ucwords(strtolower($request->ranting));
         $data->save();
 
+        Lapor::lapor(auth()->user()->name . " menambah Ranting {$data->name}"); // ==== LOG ====
         return redirect()->back()->with('informasi', [
             'type' => 'success',
             'value' => "Ranting $data->name berhasil ditambahkan"
@@ -111,9 +113,10 @@ class AdminController extends Controller
         $nama = $akun->get()->first()->name;
         event(new \App\Events\UserStateChanged($akun->get()->first()->remember_token, 'refresh'));
 
+        $akun->first()->message()->delete();
         $akun->update(['is_admin' => true]);
 
-
+        Lapor::lapor(auth()->user()->name . " menjadikan \"{$nama}\" sebagai Pengelola"); // ==== LOG ====
         return redirect()->back()->with('informasi', [
             'type' => 'success',
             'value' => "Akun {$nama} name telah menjadi admin"
@@ -133,9 +136,31 @@ class AdminController extends Controller
         event(new \App\Events\UserStateChanged($akun->get()->first()->remember_token, 'refresh'));
         $akun->update(['is_admin' => false, 'jabatan' => null]);
 
+        Lapor::lapor(auth()->user()->name . " menjadikan \"{$nama}\" sebagai User Biasa"); // ==== LOG ====
         return redirect()->back()->with('informasi', [
             'type' => 'success',
             'value' => "Akun {$nama} telah menjadi akun biasa"
+        ]);
+    }
+    
+    public function post_usersdel($id)
+    {
+        $akun = \App\User::where(['id' => $id]);
+        if( $akun->count() != 1 )
+            return redirect()->back()->with('informasi', [
+                'type' => 'error',
+                'value' => "Akun tidak tersedia."
+            ]);
+
+        $nama = $akun->get()->first()->name;
+        event(new \App\Events\UserStateChanged($akun->get()->first()->remember_token, 'refresh'));
+        $akun->get()->first()->message()->delete();
+        $akun->delete();
+
+        Lapor::lapor(auth()->user()->name . " menghapus akun \"{$nama}\""); // ==== LOG ====
+        return redirect()->back()->with('informasi', [
+            'type' => 'success',
+            'value' => "Akun {$nama} telah dihapus."
         ]);
     }
 
@@ -214,6 +239,7 @@ class AdminController extends Controller
             $headings = strip_tags($isi)
         );
 
+        Lapor::lapor(auth()->user()->name . ' Mengirim pesan siaran'); // ==== LOG ====
         return redirect()->back()->with('informasi', [
             'type' => 'success',
             'value' => "Pesan berhasil disebarkan pada : " . $pesan->created_at->format('d M h:i a')
@@ -228,6 +254,7 @@ class AdminController extends Controller
             \Artisan::call('cache:clear');
             \Artisan::call('config:clear');
             \Artisan::call('route:clear');
+            Lapor::lapor(auth()->user()->name . ' merefresh aplikasi'); // ==== LOG ====
             return redirect()->back()->with('informasi', [
                 'type' => 'success',
                 'value' => "Aplikasi berhasil disegarkan"
@@ -237,6 +264,7 @@ class AdminController extends Controller
         if( $action == "migrate" )
         {
             \Artisan::call('migrate', array('--force' => true));
+            Lapor::lapor(auth()->user()->name . ' menjalankan migrasi basis data'); // ==== LOG ====
             return redirect()->back()->with('informasi', [
                 'type' => 'success',
                 'value' => "Migrasi database berhasil"
@@ -247,6 +275,12 @@ class AdminController extends Controller
             'type' => 'warning',
             'value' => "Perintah \"Artisan\" tidak dikenali"
         ]);
+    }
+
+    public function get_log()
+    {
+        $logs = \App\SystemLog::orderBy('created_at', 'DESC')->take(10)->get();
+        return view('admin.log', compact(['logs']));
     }
 
 }

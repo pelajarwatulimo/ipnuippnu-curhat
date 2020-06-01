@@ -61,6 +61,14 @@
             </p>
           </a>
         </li>
+        <li class="nav-item">
+          <a href="{{ route('admin.log') }}" class="nav-link{{ Route::currentRouteName() == 'admin.log' ? ' active' : '' }}">
+            <i class="nav-icon fas fa-history"></i>
+            <p>
+              Catatan
+            </p>
+          </a>
+        </li>
       </ul>
     </nav>
     <!-- /.sidebar-menu -->

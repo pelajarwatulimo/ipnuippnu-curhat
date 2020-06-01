@@ -72,6 +72,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('users', 'AdminController@get_users')->name('admin.users');
         Route::post('users/down/{id}', 'AdminController@post_usersdown')->name('admin.users.down');
         Route::post('users/up/{id}', 'AdminController@post_usersup')->name('admin.users.up');
+        Route::post('users/del/{id}', 'AdminController@post_usersdel')->name('admin.users.del');
 
         Route::post('jabatan', 'AdminController@post_jabatan')->name('admin.jabatan');
         Route::get('broadcast', 'AdminController@get_broadcast')->name('admin.broadcast');
@@ -79,6 +80,8 @@ Route::group(['middleware' => ['auth']], function () {
 
         Route::view('/setting', 'admin.setting')->name('admin.setting');
         Route::get('/setting/{aksi}', 'AdminController@post_setting')->name('admin.setting.aksi');
+
+        Route::get('/log', 'AdminController@get_log')->name('admin.log');
 
     });
 

@@ -19,9 +19,22 @@
   <script src="{{ asset('/') }}assets/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
   <script src="{{ asset('/') }}assets/vendor/jquery-easing/jquery.easing.min.js"></script>
   <script src="{{ asset('/') }}assets/js/sb-admin-2.min.js"></script>
+  <script>
+    $(document).ready(function(){
+        $('a.go-section').click(function(e){
+            e.preventDefault();
+        });
+        $('#loading').fadeOut('slow',function(){
+            $('html').removeAttr('style');
+        });
+    });
+  </script>
   @yield('prepare', '')
 </head>
 <body class="d-flex text-dark bg-login p-2">
+  <div id="loading" style="width: 100vw; height: 100vh; position: fixed; display: flex; z-index: 10000; background: #1cc88a">
+    <img src="{{ asset('/') }}assets/img/load.svg" alt="Animasi Loading" style="margin: auto">
+  </div>
   <div class="container-md m-auto">
       <div class="row justify-content-center">
         <div class="col-xl-6 col-lg-7 col-md-9 p-3">

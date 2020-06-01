@@ -52,19 +52,19 @@ class Handler extends ExceptionHandler
     {
         if( config('app.env') == 'production' )
         {
-            if( $exception instanceof \Illuminate\Session\TokenMismatchException )
-                return response()->view('error', [
-                    "title" => "Permintaan Kadaluarsa",
-                    "message" => 'Sepertinya anda <b>stay</b> terlalu lama. Silahkan tekan tombol <b>Kembali<b> atau anda dapat <a href="mailto:'.env('MAIL_FROM_ADDRESS').'">menghubungi kami</a>.',
-                    "code" => 403
-                ], 403);
-            
             if( $exception instanceof \ErrorException )
                 return response()->view('error', [
                     "title" => "Kesalahan Internal",
                     "message" => 'Terjadi Kesalahan. Silahkan <a href="mailto:'.env('MAIL_FROM_ADDRESS').'">menghubungi kami</a> untuk memperbaiki masalah ini.',
                     "code" => 500
                 ], 500);
+
+            if( $exception instanceof \Illuminate\Session\TokenMismatchException )
+                return response()->view('error', [
+                    "title" => "Permintaan Kadaluarsa",
+                    "message" => 'Sepertinya anda <b>stay</b> terlalu lama. Silahkan tekan tombol <b>Kembali<b> atau anda dapat <a href="mailto:'.env('MAIL_FROM_ADDRESS').'">menghubungi kami</a>.',
+                    "code" => 403
+                ], 403);
                 
             if( $exception->getStatusCode() == 404 ||
                 $exception instanceof \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException )

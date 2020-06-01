@@ -427,6 +427,7 @@ class ComposerStaticInit283c9039c8f013b0328f08ffa8ef5ea1
         'App\\Providers\\EventServiceProvider' => __DIR__ . '/../..' . '/app/Providers/EventServiceProvider.php',
         'App\\Providers\\RouteServiceProvider' => __DIR__ . '/../..' . '/app/Providers/RouteServiceProvider.php',
         'App\\Ranting' => __DIR__ . '/../..' . '/app/Ranting.php',
+        'App\\SystemLog' => __DIR__ . '/../..' . '/app/SystemLog.php',
         'App\\User' => __DIR__ . '/../..' . '/app/User.php',
         'Askedio\\Laravel5ProfanityFilter\\ProfanityFilter' => __DIR__ . '/..' . '/askedio/laravel5-profanity-filter/app/ProfanityFilter.php',
         'Askedio\\Laravel5ProfanityFilter\\Providers\\ProfanityFilterServiceProvider' => __DIR__ . '/..' . '/askedio/laravel5-profanity-filter/app/Providers/ProfanityFilterServiceProvider.php',

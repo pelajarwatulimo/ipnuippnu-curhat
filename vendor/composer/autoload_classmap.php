@@ -37,6 +37,7 @@ return array(
     'App\\Providers\\EventServiceProvider' => $baseDir . '/app/Providers/EventServiceProvider.php',
     'App\\Providers\\RouteServiceProvider' => $baseDir . '/app/Providers/RouteServiceProvider.php',
     'App\\Ranting' => $baseDir . '/app/Ranting.php',
+    'App\\SystemLog' => $baseDir . '/app/SystemLog.php',
     'App\\User' => $baseDir . '/app/User.php',
     'Askedio\\Laravel5ProfanityFilter\\ProfanityFilter' => $vendorDir . '/askedio/laravel5-profanity-filter/app/ProfanityFilter.php',
     'Askedio\\Laravel5ProfanityFilter\\Providers\\ProfanityFilterServiceProvider' => $vendorDir . '/askedio/laravel5-profanity-filter/app/Providers/ProfanityFilterServiceProvider.php',

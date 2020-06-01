@@ -48,8 +48,11 @@
             <li class="nav-item">
               <a class="nav-link text-white px-lg-4 go-section" href="#beranda">Beranda</a>
             </li>
+            <li class="nav-item">
+              <a class="nav-link text-white px-lg-4" href="https://github.com/isnunasrudin/ipnuippnu-curhat">GitHub</a>
+            </li>
             <li class="nav-item pl-lg-4 pr-lg-3">
-              <a class="nav-link btn btn-warning text-dark px-3 font-weight-bolder" href="{{ asset('/') }}login">Masuk<i class="fas fa-arrow-right ml-2"></i></a>
+              <a class="nav-link btn bg-white text-dark px-3 font-weight-bolder" href="{{ asset('/') }}login">Masuk<i class="fas fa-arrow-right ml-2"></i></a>
             </li>
           </ul>
         </div>
@@ -75,8 +78,8 @@
                 Laman {{ config('app.name') }} ini dikembangkan oleh {{ config('app.author') }}.
                 Silahkan masuk untuk memberikan kritik / masukan kepada kami.</p>
               <div class="d-flex mt-5 justify-content-center justify-content-lg-left">
-                <a href="{{ asset('/') }}login" class="btn btn-warning btn-lg text-dark px-4 font-weight-bolder">Masuk<i class="fas fa-arrow-right ml-2 d-none"></i></a>
-                <a href="{{ asset('/') }}signup" class="text-white my-auto mx-5 font-weight-bolder">Mendaftar</a>
+                <a href="{{ asset('/') }}signup" class="btn btn-warning btn-lg px-4 font-weight-bolder" style="color: #2d2d2d !important">Mendaftar</a>
+                <a href="{{ asset('/') }}login" class="text-white my-auto mx-5 font-weight-bolder">Masuk</a>
               </div>
             </div>
             
