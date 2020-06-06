@@ -58,15 +58,8 @@ class Handler extends ExceptionHandler
                     "message" => 'Terjadi Kesalahan. Silahkan <a href="mailto:'.env('MAIL_FROM_ADDRESS').'">menghubungi kami</a> untuk memperbaiki masalah ini.',
                     "code" => 500
                 ], 500);
-
-            if( $exception instanceof \Illuminate\Session\TokenMismatchException )
-                return response()->view('error', [
-                    "title" => "Permintaan Kadaluarsa",
-                    "message" => 'Sepertinya anda <b>stay</b> terlalu lama. Silahkan tekan tombol <b>Kembali<b> atau anda dapat <a href="mailto:'.env('MAIL_FROM_ADDRESS').'">menghubungi kami</a>.',
-                    "code" => 403
-                ], 403);
                 
-            if( $exception->getStatusCode() == 404 ||
+            if( $exception instanceof \Symfony\Component\HttpKernel\Exception\NotFoundHttpException ||
                 $exception instanceof \Symfony\Component\HttpKernel\Exception\MethodNotAllowedHttpException )
                 return response()->view('error', [
                     "title" => "Halaman Tidak Ditemukan",
@@ -74,12 +67,15 @@ class Handler extends ExceptionHandler
                     "code" => 404
                 ], 404);
                 
-            if( $exception->getStatusCode() == 503 )
+            if( $exception instanceof \Illuminate\Foundation\Http\Exceptions\MaintenanceModeException )
                 return response()->view('error', [
                     "title" => "Mohon Maaf",
                     "message" => 'Mohon maaf, layanan sedang dinonaktifkan dalam beberapa waktu untuk peningkatan beberapa layanan. Silahkan kembali lagi nanti.',
                     "code" => 503
                 ], 503);
+
+            if( $exception instanceof \Illuminate\Session\TokenMismatchException )
+                return redirect()->back();
 
         }
         

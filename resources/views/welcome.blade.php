@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="robots" content="index, follow" />
-    <meta name="description" content="Website Cuhat Rekan dan Rekanita ini digunakan untuk menyalurkan aspirasi, kritik, saran dan pesan kepada PAC IPNU dan IPPNU Watulimo.">  
+    <meta name="description" content="Website Cuhat Rekan dan Rekanita ini digunakan untuk menyalurkan aspirasi, kritik, saran dan pesan dari Pelajar Watulimo kepada PAC IPNU - IPPNU Watulimo.">
     <meta name="author" content="{{ config('app.author') }}">
     <link rel="shortcut icon" href="{{ asset('/') }}favicon.ico" type="image/x-icon">
     <title>Selamat Datang | {{ config('app.name') }}</title>
@@ -37,7 +36,7 @@
       <div class="container px-lg-5">
         <a class="navbar-brand font-weight-bold text-center text-lg-left" href="{{ asset('/') }}">
           <img src="{{ asset('/') }}assets/img/ipnu-ippnu.png" height="40" alt="Logo IPNU IPPNU" class="mr-lg-3">
-          <span class="d-block d-lg-inline">Curhat Rekan & Rekanita</span>
+          <h1 class="d-block d-lg-inline h4">{{ config('app.name') }}</h1>
         </a>
         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
           <span class="navbar-toggler-icon"></span>
@@ -49,7 +48,7 @@
               <a class="nav-link text-white px-lg-4 go-section" href="#beranda">Beranda</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link text-white px-lg-4" href="https://github.com/isnunasrudin/ipnuippnu-curhat">GitHub</a>
+              <a class="nav-link text-white px-lg-4" href="https://github.com/pelajarwatulimo/ipnuippnu-curhat">GitHub</a>
             </li>
             <li class="nav-item pl-lg-4 pr-lg-3">
               <a class="nav-link btn bg-white text-dark px-3 font-weight-bolder" href="{{ asset('/') }}login">Masuk<i class="fas fa-arrow-right ml-2"></i></a>
