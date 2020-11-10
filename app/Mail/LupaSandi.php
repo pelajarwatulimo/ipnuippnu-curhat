@@ -41,6 +41,7 @@ class LupaSandi extends Mailable
 
         return $this->subject('Lupa Kata Sandi')
             ->with('link', $link)
-            ->view('email.reset_pass');
+            ->view('email.reset_pass')
+            ->text("email.reset_pass_plain");
     }
 }

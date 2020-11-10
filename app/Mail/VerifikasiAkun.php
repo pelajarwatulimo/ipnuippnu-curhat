@@ -37,6 +37,6 @@ class VerifikasiAkun extends Mailable
          return $this->subject('Verifikasi Akun Anda')
              ->with('link', $link)
              ->view('email.verifikasi')
-             ->addPart("Assalamu'alaikum Wr. Wb. Seseorang telah mendaftarkan email ini pada situs Pelajar Watulimo.", 'text/plain');
+             ->text("email.verifikasi_plain");
     }
 }
