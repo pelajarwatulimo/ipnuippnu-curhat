@@ -98,7 +98,7 @@ class UmumController extends Controller
             'type' => 'success',
             'value' => "Pendaftaran berhasil. Silahkan cek Inbox <b>$account->email</b> untuk melakukan verifikasi. Jika belum ada, tunggu hingga 5 menit. <b>Cek juga pada folder SPAM. </b>"]
         );
-        
+
     }
 
     public function get_verifikasi(Request $request)
@@ -137,24 +137,24 @@ class UmumController extends Controller
         if( isset($request->userID) )
         {
             $playerID = $request->userID;
-            $fields = array( 
+            $fields = array(
                 'app_id' => config('app.onesignal_appID'),
                 'tags' => array(
                     'userID' => 'none',
                     'isAdmin' => 'none'
                 )
-            ); 
-            $fields = json_encode($fields); 
+            );
+            $fields = json_encode($fields);
 
-            $ch = curl_init(); 
-            curl_setopt($ch, CURLOPT_URL, 'https://onesignal.com/api/v1/players/'.$playerID); 
-            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json')); 
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true); 
-            curl_setopt($ch, CURLOPT_HEADER, false); 
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'https://onesignal.com/api/v1/players/'.$playerID);
+            curl_setopt($ch, CURLOPT_HTTPHEADER, array('Content-Type: application/json'));
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, true);
+            curl_setopt($ch, CURLOPT_HEADER, false);
             curl_setopt($ch, CURLOPT_CUSTOMREQUEST, "PUT");
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $fields); 
-            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false); 
-            curl_exec($ch); 
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $fields);
+            curl_setopt($ch, CURLOPT_SSL_VERIFYPEER, false);
+            curl_exec($ch);
             curl_close($ch);
         }
 
@@ -169,7 +169,7 @@ class UmumController extends Controller
         $pesan = \App\Broadcast::where(['slug' => $slug])->get();
         if( $pesan->count() == 0 )
             abort(404);
-        
+
         $pesan = $pesan->first();
         return view('broadcast', compact(['pesan']));
     }
@@ -207,7 +207,7 @@ class UmumController extends Controller
                 'value' => 'Alamat ubah kata sandi tidak tersedia atau sudah digunakan. Anda bisa melakukan '.
                     '<a href="'. route('reset_pass') .'">permintaan ubah kata sandi</a> kembali.' ]
             );
-        
+
         $data = json_decode(\Storage::disk('reset_pass')->get($kunci[0]));
         if( \App\User::whereEmail($data->email)->count() != 1 )
         {

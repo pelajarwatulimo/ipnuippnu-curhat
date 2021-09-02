@@ -65,15 +65,15 @@
             <div class="col-lg-5 text-center col-12 order-lg-2">
               <h1 class="mb-3 font-weight-bold d-block d-lg-none mt-3">Selamat Datang</h1>
               <img src="{{ asset('/') }}assets/img/ketua.png" alt="Gambar Ketua" style="width: 100%; height: auto">
-              <span class="font-weight-bold d-block h6 mb-0">( Rekan Hadi & Rekanita Rintan )</span>
+              <span class="font-weight-bold d-block h6 mb-0">( Rekan Imron & Rekanita Mega )</span>
               <span style="color: #fff8" class="small font-weight-bold d-block">Ketua {{ config('app.author') }}</span>
-              
+
             </div>
 
             <div class="col-lg-7 my-lg-auto col-12 order-lg-1 text-center text-lg-left mt-4 mt-lg-0">
               <h1 class="mb-3 font-weight-bold d-none d-lg-block">Selamat Datang</h1>
               <p style="font-weight: lighter; line-height: 1.5;" class="h5">
-                Selamat Belajar, Berjuang, & Bertaqwa.
+                Selamat Belajar, Berjuang & Bertaqwa.
                 Laman {{ config('app.name') }} ini dikembangkan oleh {{ config('app.author') }}.
                 Silahkan masuk untuk memberikan kritik / masukan kepada kami.</p>
               <div class="d-flex mt-5 justify-content-center justify-content-lg-left">
@@ -81,7 +81,7 @@
                 <a href="{{ asset('/') }}login" class="text-white my-auto mx-5 font-weight-bolder">Masuk</a>
               </div>
             </div>
-            
+
           </div>
         </div>
 
@@ -89,7 +89,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 144.54 17.34" preserveAspectRatio="none" fill="currentColor"><path d="M144.54,17.34H0V0H144.54ZM0,0S32.36,17.34,72.27,17.34,144.54,0,144.54,0"></path></svg>
         </div>
     </section>
-    
+
     <footer class="text-dark text-center small py-4 m-0">
       <i class="fab fa-creative-commons"></i>
       <span>{!! config('app.license') !!}</span>
